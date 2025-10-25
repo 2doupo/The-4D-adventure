@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5rxscqsr526u"]
+
+[ext_resource type="Script" uid="uid://bgwsk3ut7uet6" path="res://Scene/Menu/credits.gd" id="1_mu6ye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6y4it"]
+bg_color = Color(0.34117648, 0.34117648, 0.34117648, 1)
+
+[node name="Tutorial" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6y4it")
+script = ExtResource("1_mu6ye")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 50
+text = "Back
+"
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 525)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 28
+text = "In this game you control two squared at the same time in two different plan.
+
+The goal is to have your squares on the two flags at the same time without falling in a hole. Good luck !
+
+arrow keys or joystick : Moving in the two plans
+
+S on keyboard  or Y on xbox manette : switch in which plan your movements are normal
+
+"
+scroll_active = false
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

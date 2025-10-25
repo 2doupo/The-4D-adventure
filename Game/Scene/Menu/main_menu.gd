@@ -1,0 +1,46 @@
+extends Container
+
+const TITLE_SPEED = 0.01 
+const MAX_BOLDNESS = 0.65
+var title_direction = 1
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass#$Buttons/Title.theme.default_font.variation_transform = Transform2D(-TITLE_SPEED*$Timer.wait_time,Vector2($Buttons/Title.size/2))
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	 #rotate_title(TITLE_SPEED*title_direction*parabole($Timer.time_left/$Timer.wait_time))
+	bold_title()
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_credits_pressed() -> void:
+	Global.current_state = Global.GameState.CREDIT
+	get_node("/root/Main/Credits").visible = true
+
+func _on_settings_pressed() -> void:
+	get_node("/root/Main/Settings").visible = true
+	Global.current_state = Global.GameState.SETTINGS
+
+
+func _on_levels_pressed() -> void:
+	Global.current_state = Global.GameState.LEVELMENU
+	get_node("/root/Main/Levels").visible = true
+	visible = false
+
+func _on_tutorial_pressed() -> void:
+	get_node("/root/Main/Tutorial").visible = true
+func rotate_title(angle):
+	var matrix : Transform2D = Transform2D(angle,Vector2($Buttons/Title.size/2))
+	$Buttons/Title.theme.default_font.variation_transform *= matrix
+func bold_title():
+	$Buttons/Title.theme.default_font.variation_embolden = MAX_BOLDNESS *parabole($Timer.time_left/$Timer.wait_time)
+
+
+func _on_timer_timeout() -> void:
+	title_direction*=-1
+func parabole(x):
+	return 1-(2*x-1)**(2)

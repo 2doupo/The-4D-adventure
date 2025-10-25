@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0lp0jir3h5kp"]
+
+[ext_resource type="Script" uid="uid://dwkujyoncs5c8" path="res://Scene/PlanDisplay.gd" id="1_ko861"]
+[ext_resource type="Texture2D" uid="uid://gdut6xixuu20" path="res://Sprite/arrow.png" id="2_mhvnh"]
+[ext_resource type="Texture2D" uid="uid://ca4nb10hlw5vk" path="res://Sprite/Flag.png" id="3_mhvnh"]
+
+[sub_resource type="Gradient" id="Gradient_ilx6d"]
+colors = PackedColorArray(0.63529414, 0.1254902, 0, 1, 0.7921569, 0.84705883, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mhvnh"]
+gradient = SubResource("Gradient_ilx6d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilx6d"]
+size = Vector2(63, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhvnh"]
+size = Vector2(54, 66)
+
+[node name="PlanDisplay" type="Window"]
+disable_3d = true
+canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
+size = Vector2i(576, 550)
+exclusive = true
+borderless = true
+script = ExtResource("1_ko861")
+metadata/BaseVector1 = Vector4(0, 0, 0, 0)
+metadata/BaseVector2 = Vector4(0, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 685.0
+offset_bottom = 740.0
+color = Color(0.29803923, 0.32941177, 0.42352942, 1)
+
+[node name="Origin" type="Node2D" parent="."]
+position = Vector2(288, 275)
+
+[node name="Player2D" type="CharacterBody2D" parent="Origin"]
+collision_mask = 14
+
+[node name="PlayerSprite" type="Sprite2D" parent="Origin/Player2D"]
+scale = Vector2(1, 0.99999994)
+texture = SubResource("GradientTexture2D_mhvnh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Origin/Player2D"]
+shape = SubResource("RectangleShape2D_ilx6d")
+
+[node name="Arrows" type="Node2D" parent="Origin/Player2D"]
+visible = false
+
+[node name="Up" type="Sprite2D" parent="Origin/Player2D/Arrows"]
+position = Vector2(0, -59)
+scale = Vector2(3.65625, 3.65625)
+texture = ExtResource("2_mhvnh")
+
+[node name="Up2" type="Sprite2D" parent="Origin/Player2D/Arrows"]
+position = Vector2(-64, 0)
+rotation = -1.5707964
+scale = Vector2(3.65625, 3.65625)
+texture = ExtResource("2_mhvnh")
+
+[node name="Up3" type="Sprite2D" parent="Origin/Player2D/Arrows"]
+position = Vector2(64, 0)
+rotation = 1.5707964
+scale = Vector2(3.65625, 3.65625)
+texture = ExtResource("2_mhvnh")
+
+[node name="Up4" type="Sprite2D" parent="Origin/Player2D/Arrows"]
+position = Vector2(0, 61)
+rotation = -3.1415927
+scale = Vector2(3.65625, 3.65625)
+texture = ExtResource("2_mhvnh")
+
+[node name="Destination2D" type="Area2D" parent="Origin"]
+position = Vector2(156, 0)
+collision_layer = 8
+
+[node name="DestinationSprite" type="Sprite2D" parent="Origin/Destination2D"]
+scale = Vector2(4.124999, 4.6249995)
+texture = ExtResource("3_mhvnh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Origin/Destination2D"]
+position = Vector2(-1, 5)
+shape = SubResource("RectangleShape2D_mhvnh")
+
+[node name="Obstacles" type="Node2D" parent="Origin"]
+
+[node name="Holes" type="Area2D" parent="Origin"]
+position = Vector2(-288, -275)
+collision_layer = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[connection signal="body_entered" from="Origin/Destination2D" to="." method="_on_flag"]
+[connection signal="body_exited" from="Origin/Destination2D" to="." method="_out_flag"]
+[connection signal="body_entered" from="Origin/Holes" to="." method="_on_holes_body_entered"]

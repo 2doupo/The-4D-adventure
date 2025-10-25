@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1vp4bvkxxm3x"]
+
+[ext_resource type="Script" uid="uid://miij4d6g7kep" path="res://Scene/Levels/level.gd" id="1_idtoe"]
+[ext_resource type="PackedScene" uid="uid://c0lp0jir3h5kp" path="res://Scene/plan_display.tscn" id="2_2qnmj"]
+[ext_resource type="PackedScene" uid="uid://dyxyrxw7kqolx" path="res://Scene/player.tscn" id="3_8ftus"]
+[ext_resource type="PackedScene" uid="uid://2ts6jp151buq" path="res://Scene/destination.tscn" id="4_81w2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or6n4"]
+bg_color = Color(0.1764706, 0.20784314, 0.11372549, 0.8117647)
+
+[node name="1" type="Node"]
+script = ExtResource("1_idtoe")
+
+[node name="Views" type="BoxContainer" parent="."]
+offset_left = -2.0
+offset_right = 1150.0
+offset_bottom = 648.0
+
+[node name="PlanDisplay1" parent="Views" instance=ExtResource("2_2qnmj")]
+
+[node name="PlanDisplay2" parent="Views" instance=ExtResource("2_2qnmj")]
+position = Vector2i(576, 0)
+metadata/BaseVector1 = Vector4(0, 1, 1, 0)
+metadata/BaseVector2 = Vector4(1, 0, 0, 1)
+
+[node name="ColorRect" parent="Views/PlanDisplay2" index="0"]
+offset_left = -12.0
+offset_right = 673.0
+color = Color(0.29803923, 0.61960787, 0.5803922, 1)
+
+[node name="PopupMenu" type="PopupMenu" parent="Views"]
+oversampling_override = 1.0
+mode = 3
+title = "You Win !"
+initial_position = 1
+size = Vector2i(500, 500)
+borderless = false
+always_on_top = true
+theme_override_font_sizes/font_size = 50
+theme_override_styles/panel = SubResource("StyleBoxFlat_or6n4")
+item_count = 3
+item_0/text = "Back to Menu"
+item_0/id = 0
+item_1/text = "Next Level"
+item_1/id = 1
+item_2/text = "Replay this Level"
+item_2/id = 2
+
+[node name="Player" parent="." instance=ExtResource("3_8ftus")]
+
+[node name="Destination" parent="." instance=ExtResource("4_81w2i")]
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="PositionText" type="RichTextLabel" parent="UI"]
+offset_left = -2.0
+offset_top = 567.0
+offset_right = 317.0
+offset_bottom = 641.0
+theme_override_colors/table_border = Color(0, 0, 0, 0)
+theme_override_font_sizes/normal_font_size = 20
+text = "Position"
+fit_content = true
+
+[node name="BasisText1" type="RichTextLabel" parent="UI"]
+offset_left = 320.0
+offset_top = 567.0
+offset_right = 622.0
+offset_bottom = 641.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Basis 1"
+fit_content = true
+
+[node name="BasisText2" type="RichTextLabel" parent="UI"]
+offset_left = 622.0
+offset_top = 567.0
+offset_right = 965.0
+offset_bottom = 641.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Basis 2"
+fit_content = true
+
+[node name="CurrentPlanText" type="RichTextLabel" parent="UI"]
+offset_left = 965.0
+offset_top = 567.0
+offset_right = 1150.0
+offset_bottom = 641.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Plan"
+fit_content = true
+
+[node name="Reset" type="Button" parent="UI"]
+offset_left = 8.0
+offset_top = 567.0
+offset_right = 135.0
+offset_bottom = 640.0
+text = "Reset"
+
+[node name="Menu" type="Button" parent="UI"]
+offset_left = 288.0
+offset_top = 567.0
+offset_right = 412.0
+offset_bottom = 640.0
+text = "Menu"
+
+[node name="Level_number" type="RichTextLabel" parent="UI"]
+custom_minimum_size = Vector2(150, 80)
+offset_left = 920.0
+offset_top = 567.0
+offset_right = 1152.0
+offset_bottom = 647.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 50
+text = "Level"
+
+[connection signal="id_pressed" from="Views/PopupMenu" to="." method="_on_popup_menu_id_pressed"]
+[connection signal="pressed" from="UI/Reset" to="." method="reset"]
+[connection signal="pressed" from="UI/Menu" to="." method="_on_menu_pressed"]
+
+[editable path="Views/PlanDisplay2"]

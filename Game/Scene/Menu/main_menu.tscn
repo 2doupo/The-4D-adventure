@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://cy4lhwoo2ctsy"]
+
+[ext_resource type="Script" uid="uid://ckinnqkx73a4p" path="res://Scene/Menu/main_menu.gd" id="1_ftydy"]
+[ext_resource type="Texture2D" uid="uid://b1nsfj17dganx" path="res://Sprite/icon.svg" id="2_87ipw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_87ipw"]
+diffuse_texture = ExtResource("2_87ipw")
+texture_filter = 2
+texture_repeat = 3
+
+[sub_resource type="FontVariation" id="FontVariation_8ipsx"]
+
+[sub_resource type="Theme" id="Theme_adxv0"]
+default_font = SubResource("FontVariation_8ipsx")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87ipw"]
+bg_color = Color(0, 0, 0, 0.6784314)
+
+[node name="MainMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ftydy")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 2
+texture = SubResource("CanvasTexture_87ipw")
+stretch_mode = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="Buttons"]
+custom_minimum_size = Vector2(500, 160)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = SubResource("Theme_adxv0")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "The        4D        Adventure"
+horizontal_alignment = 1
+
+[node name="Levels" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "Levels"
+
+[node name="Tutorial" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "Tutorial"
+
+[node name="Settings" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "Settings
+"
+
+[node name="Credits" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "Credits
+"
+
+[node name="Quit" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_87ipw")
+text = "Quit
+"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="pressed" from="Buttons/Levels" to="." method="_on_levels_pressed"]
+[connection signal="pressed" from="Buttons/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Buttons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
