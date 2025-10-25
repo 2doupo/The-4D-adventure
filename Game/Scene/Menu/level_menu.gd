@@ -31,6 +31,8 @@ func level_menu_check_input():
 		$VBoxContainer/LevelList.select(min($VBoxContainer/LevelList.item_count-1,$VBoxContainer/LevelList.get_selected_items()[0]+$VBoxContainer/LevelList.max_columns))	
 	elif Input.is_action_pressed("ui_accept") && $VBoxContainer/LevelList.get_selected_items().size() != 0:
 		launch_level($VBoxContainer/LevelList.get_selected_items()[0])
+	elif Input.is_action_pressed("ui_cancel"):
+		_on_back_pressed()
 func launch_level(index):
 	$VBoxContainer/LevelList.deselect_all()
 	Global.current_state = Global.GameState.LEVEL
