@@ -12,3 +12,4 @@ enum GameState {
 
 var levels_completed = []
 var current_level = 1
+const TOTAL_LEVEL = 9

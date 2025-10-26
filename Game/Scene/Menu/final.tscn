@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://b86g8cpuyno7i"]
+
+[ext_resource type="Script" uid="uid://dawlfbyhse8kp" path="res://Scene/Menu/final.gd" id="1_1jd1u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6y4it"]
+bg_color = Color(0.34117648, 0.34117648, 0.34117648, 1)
+
+[node name="Final" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6y4it")
+script = ExtResource("1_1jd1u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 50
+text = "Back
+"
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 525)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 28
+text = "Congratulations ! You manage to finished all available levels. It would be super cool if you wanted to give me feedback about what you think about the game. What do you prefer ? What could be better ? Do you have a new idea for the game ? It we be a pleasure to hear it. 
+Have a nice day
+
+Douteau Arthur
+
+"
+scroll_active = false
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

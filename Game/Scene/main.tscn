@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dem3wlo1kyhsd"]
+[gd_scene load_steps=9 format=3 uid="uid://dem3wlo1kyhsd"]
 
 [ext_resource type="Script" uid="uid://mi0124t35oqr" path="res://Scene/main.gd" id="1_btn6h"]
 [ext_resource type="PackedScene" uid="uid://cy4lhwoo2ctsy" path="res://Scene/Menu/main_menu.tscn" id="3_r34rm"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://f27raki5k6jj" path="res://Music/groovy-ambient-funk-201745.mp3" id="5_3amdw"]
 [ext_resource type="PackedScene" uid="uid://bx2wy3g61444a" path="res://Scene/Menu/credits.tscn" id="6_1xcnr"]
 [ext_resource type="PackedScene" uid="uid://c5rxscqsr526u" path="res://Scene/Menu/tutorial.tscn" id="7_ow1sv"]
+[ext_resource type="PackedScene" uid="uid://b86g8cpuyno7i" path="res://Scene/Menu/final.tscn" id="8_75buv"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_btn6h")
@@ -37,4 +38,7 @@ visible = false
 [node name="CurrentLevel" type="Node2D" parent="."]
 
 [node name="Tutorial" parent="." instance=ExtResource("7_ow1sv")]
+visible = false
+
+[node name="Final" parent="." instance=ExtResource("8_75buv")]
 visible = false
